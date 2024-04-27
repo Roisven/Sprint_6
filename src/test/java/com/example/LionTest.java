@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -21,7 +20,7 @@ public class LionTest {
     @Test()
     public void lionSexHaveException() {
         try {
-            Lion lion = new Lion(" ");
+            Lion lion = new Lion(" ", feline);
             lion.doesHaveMane();
         } catch (Exception thrown) {
             assertNotEquals(" ", thrown.getMessage());
@@ -32,7 +31,7 @@ public class LionTest {
     public void lionConstructorIncorrectSexReturnExceptionText() {
         String sex = "asd";
         try {
-            new Lion(sex);
+            new Lion(sex, feline);
             Assert.fail("Exception thrown");
         } catch (Exception thrown) {
             assertNotEquals(sex, thrown.getMessage());
@@ -41,7 +40,7 @@ public class LionTest {
 
     @Test
     public void isLionHaveManeTrue() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
         boolean expectedHasMane = true;
         boolean actualHasMane = lion.doesHaveMane();
         assertEquals(expectedHasMane, actualHasMane);
@@ -49,14 +48,14 @@ public class LionTest {
 
     @Test
     public void getKittensReturnFelineGetKittens() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
         lenient().when(feline.getKittens()).thenReturn(1);
         assertEquals(1, lion.getKittens());
     }
 
     @Test
     public void getLionEatAnatherMeat() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
         lenient().when(feline.getFood("Хищник")).thenReturn(Arrays.asList("Животные", "Рыба", "Птицы"));
         List<String> expectedEatMeat = Arrays.asList("Животные", "Птицы", "Рыба");
         List<String> actualEatMeat = lion.getFood();
@@ -65,7 +64,7 @@ public class LionTest {
 
     @Test
     public void getLionEatMeat() throws Exception {
-        Lion lion = new Lion("Самец");
+        Lion lion = new Lion("Самец", feline);
         lenient().when(feline.getFood("Хищник")).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
         List<String> expectedEatMeat = Arrays.asList("Животные", "Птицы", "Рыба");
         List<String> actualEatMeat = lion.getFood();

@@ -28,7 +28,7 @@ public class LionParamTest {
     @Test
     public void hasMane() throws Exception {
         Feline feline = new Feline();
-        Lion lion = new Lion(lionSex);
+        Lion lion = new Lion(lionSex, feline);
         boolean actual = lion.doesHaveMane();
         assertEquals("Неправильное значение в hasMane", hasMane, actual);
     }
